@@ -2,9 +2,21 @@ import { Link } from "react-router-dom";
 import { CountriesInterface } from "../../types/interfaces";
 
 export default function AllCountries(props: { countries: CountriesInterface[] }) {
+    const sortedCountries = props.countries.slice().sort((a, b) => {
+        const nameA = a.name.common.toUpperCase();
+        const nameB = b.name.common.toUpperCase();
+        if (nameA < nameB) {
+            return -1;
+        }
+        if (nameA > nameB) {
+            return 1;
+        }
+        return 0;
+    });
+
     return (
         <section className="container-block">
-            {props.countries.map((country: CountriesInterface) => {
+            {sortedCountries.map((country: CountriesInterface) => {
                 const { name, population, region, capital, flags } = country;
 
                 if (
