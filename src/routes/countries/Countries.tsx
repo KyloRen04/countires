@@ -6,7 +6,7 @@ import FilteredCountries from "./FilteredCountries";
 import Loader from "../../components/Loader";
 
 export default function Countries() {
-  const url = `https://restcountries.com/v3.1/all`;
+  const url = `https://restcountries.com/v3.1/independent`;
   const [countries, setCountries] = useState([] as any[]);
   const [isLoading, setIsLoading] = useState(true);
   const [foundFilter, setFoundFilter] = useState(false);
@@ -26,12 +26,12 @@ export default function Countries() {
 
   useEffect(() => {
     let mounted = true;
-      if (mounted) {
-        fetchCountries();
-      }
-  
+    if (mounted) {
+      fetchCountries();
+    }
+
     return () => {
-      mounted = false; 
+      mounted = false;
     };
   }, []);
   const searchCountries = (searchValue: string): void => {
@@ -42,7 +42,7 @@ export default function Countries() {
       );
       console.log("Filtered countries:", filter);
       setFiltered(filter);
-  
+
       if (filter.length === 0) {
         setFoundFilter(false);
       } else {
@@ -53,17 +53,14 @@ export default function Countries() {
       setFoundFilter(false);
     }
   };
-  
-  
-  
 
   const resetInput = (): void => {
     return setSearchInput("");
-  }
+  };
   return (
     <main>
       {isLoading ? (
-       <Loader />
+        <Loader />
       ) : (
         <>
           <Search
